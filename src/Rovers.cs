@@ -7,17 +7,26 @@ namespace Rovers
         public int posX { get; set; }
         public int posY { get; set; }
         public string dir; // Rover direction
-        string[] str_dir = { "N", "E", "S", "W" };
+
         public bool nextMoveX { get; set; }
         public bool nextMoveSum { get; set; }
         public int maxX { get; set; }
         public int maxY { get; set; }
+        static class Directions
+        {
+            public const string North = "North";
+            public const string East = "East";
+            public const string South = "South";
+            public const string West = "West";
+
+        }
+
 
         public RoversRobot(int _maxX, int _maxY)
         {
             posX = 1;
             posY = 1;
-            dir = str_dir[0];
+            dir = Directions.North;
             nextMoveX = false;
             nextMoveSum = true;
             maxX = _maxX;
@@ -72,23 +81,23 @@ namespace Rovers
         {
             switch (dir.ToString())
             {
-                case "N":
-                    dir = "W";
+                case Directions.North:
+                    dir = Directions.West;
                     nextMoveX = true;
                     nextMoveSum = false;
                     break;
-                case "W":
-                    dir = "S";
+                case Directions.West:
+                    dir = Directions.South;
                     nextMoveX = true;
                     nextMoveSum = false;
                     break;
-                case "S":
-                    dir = "E";
+                case Directions.South:
+                    dir = Directions.East;
                     nextMoveSum = true;
                     nextMoveX = true;
                     break;
-                case "E":
-                    dir = "N";
+                case Directions.East:
+                    dir = Directions.North;
                     nextMoveSum = true;
                     nextMoveX = false;
                     break;
@@ -99,23 +108,23 @@ namespace Rovers
         {
             switch (dir.ToString())
             {
-                case "N":
-                    dir = "E";
+                case Directions.North:
+                    dir = Directions.East;
                     nextMoveX = true;
                     nextMoveSum = true;
                     break;
-                case "W":
-                    dir = "N";
+                case Directions.West:
+                    dir = Directions.North;
                     nextMoveX = false;
                     nextMoveSum = true;
                     break;
-                case "S":
-                    dir = "W";
+                case Directions.South:
+                    dir = Directions.West;
                     nextMoveSum = false;
                     nextMoveX = true;
                     break;
-                case "E":
-                    dir = "S";
+                case Directions.East:
+                    dir = Directions.South;
                     nextMoveSum = false;
                     nextMoveX = false;
                     break;
