@@ -34,14 +34,14 @@ public static class DirectionExtensions
         };
     }
 
-    public static (int, int) Move(this Directions direction, int x, int y)
+    public static (int, int) Move(this Directions direction, int x, int y, int spaces)
     {
         return direction switch
         {
-            Directions.North => (x, y + 1),
-            Directions.East => (x + 1, y),
-            Directions.South => (x, y - 1),
-            Directions.West => (x - 1, y),
+            Directions.North => (x, y + spaces),
+            Directions.East => (x + spaces, y),
+            Directions.South => (x, y - spaces),
+            Directions.West => (x - spaces, y),
             _ => throw new ArgumentException($"Invalid direction: {direction}")
         };
     }

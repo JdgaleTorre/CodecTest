@@ -6,10 +6,16 @@ namespace Robot.Test
 {
     public class RobotTest
     {
+        static Robot newRobot = new Robot(1);
+        [SetUp]
+        public static void InitializeTests()
+        {
+            // Creating Robot and Plateau
+            newRobot = new Robot(1);
+        }
         [Test]
         public void BasicMoves()
         {
-            Robot newRobot = new Robot();
             (int, int) newPosition;
             for (int i = 0; i < 2; i++)
             {
@@ -27,7 +33,6 @@ namespace Robot.Test
         [Test]
         public void ZeroMove()
         {
-            Robot newRobot = new Robot();
             (int, int, string) position = newRobot.GetPosition();
             Assert.AreEqual(1, position.Item1);
             Assert.AreEqual(1, position.Item2);
@@ -37,7 +42,6 @@ namespace Robot.Test
         [Test]
         public void JustTurningLeft()
         {
-            Robot newRobot = new Robot();
             newRobot.TurnLeft();
             newRobot.TurnLeft();
             newRobot.TurnLeft();
@@ -51,7 +55,6 @@ namespace Robot.Test
         [Test]
         public void JustTurningRight()
         {
-            Robot newRobot = new Robot();
             newRobot.TurnRight();
             newRobot.TurnRight();
             newRobot.TurnRight();
@@ -66,7 +69,6 @@ namespace Robot.Test
         [Test]
         public void MakingTenMoves()
         {
-            Robot newRobot = new Robot();
             (int, int) newPosition;
             for (int i = 0; i < 10; i++)
             {

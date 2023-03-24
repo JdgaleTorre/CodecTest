@@ -10,7 +10,9 @@ do
         Console.Write("Insert Moves: ex. FFRFLFLF:");
         string moves = Console.ReadLine().ToString();
 
-        Rovers.RoversRobot newRovers = new Rovers.RoversRobot(int.Parse(size.Split(",")[0]), int.Parse(size.Split(",")[1]));
+
+        Plateau newPlateau = new Plateau(int.Parse(size.Split(",")[0]), int.Parse(size.Split(",")[1]));
+        Rovers.RoversRobot newRovers = new Rovers.RoversRobot(newPlateau, 1);
         Console.WriteLine(newRovers.Instructions(moves));
 
     }

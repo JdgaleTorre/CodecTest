@@ -7,12 +7,14 @@ namespace Robot
         private int posX { get; set; }
         private int posY { get; set; }
         private Directions dir; // Rover direction
+        private int stepLength; // Step length
 
-        public BareRobot()
+        public BareRobot(int step)
         {
             posX = 1;
             posY = 1;
             dir = Directions.North;
+            stepLength = step;
         }
 
         public abstract string Instructions(string command);
@@ -40,7 +42,7 @@ namespace Robot
 
         public (int, int) GetMoveDirection()
         {
-            return dir.Move(posX, posY);
+            return dir.Move(posX, posY, stepLength);
         }
 
         public void Move(int x, int y)
@@ -54,6 +56,10 @@ namespace Robot
 
     public class Robot : BareRobot
     {
+        public Robot(int step) : base(step)
+        {
+        }
+
         public override string Instructions(string commands)
         {
             foreach (var command in commands)
