@@ -26,5 +26,12 @@ namespace Rovers.Test
             Rovers.RoversRobot newRover = new Rovers.RoversRobot(5, 5);
             Assert.AreEqual("1,1,North", newRover.Instruction("LLLL"));
         }
+
+        [Test]
+        public void InstructionNotValid()
+        {
+            Rovers.RoversRobot newRover = new Rovers.RoversRobot(5, 5);
+            Assert.AreEqual("Instruction no valid!", newRover.Instruction("FFFFFFFF"));
+        }
     }
 }

@@ -1,48 +1,31 @@
 using System;
+using Robot;
 
 namespace Rovers
 {
-    public class RoversRobot
+    public class RoversRobot : Robot.BareRobot
     {
-        public int posX { get; set; }
-        public int posY { get; set; }
-        public string dir; // Rover direction
+        private int _maxX { get; set; }
+        private int _maxY { get; set; }
+        private int _distance { get; set; }
 
-        public bool nextMoveX { get; set; }
-        public bool nextMoveSum { get; set; }
-        public int maxX { get; set; }
-        public int maxY { get; set; }
-        static class Directions
+        public RoversRobot(int maxX, int maxY)
         {
-            public const string North = "North";
-            public const string East = "East";
-            public const string South = "South";
-            public const string West = "West";
-
+            _maxX = maxX;
+            _maxY = maxY;
+            _distance = 1;
         }
-
-
-        public RoversRobot(int _maxX, int _maxY)
-        {
-            posX = 1;
-            posY = 1;
-            dir = Directions.North;
-            nextMoveX = false;
-            nextMoveSum = true;
-            maxX = _maxX;
-            maxY = _maxY;
-        }
-
 
         public string Instruction(string moves)
         {
+            bool possibleMove = true;
             for (int i = 0; i < moves.Length; i++)
             {
                 switch (moves[i].ToString())
                 {
 
                     case "F":
-                        MakeMove();
+                        possibleMove = MakeMove();
                         break;
                     case "L":
                         TurnLeft();
@@ -52,84 +35,60 @@ namespace Rovers
                         break;
 
                 }
-            }
 
-            return posX + "," + posY + "," + dir;
+                if (!possibleMove)
+                {
+                    return "Instruction no valid!";
+                }
+            }
+            (int, int, string) position = GetPosition();
+            return position.Item1 + "," + position.Item2 + "," + position.Item3;
         }
 
-        public void MakeMove()
+        public override bool MakeMove()
         {
+            (int, int, string) position = GetPosition();
             if (nextMoveX)
             {
-                int possibleX = nextMoveSum ? posX + 1 : posX - 1;
-                if (possibleX >= 1 && possibleX <= maxX)
+                int possibleX = nextMoveSum ? position.Item1 + 1 : position.Item1 - 1;
+                if (possibleX >= 1 && possibleX <= _maxX)
                 {
-                    posX = possibleX;
+                    if (nextMoveSum)
+                    {
+                        MoveTo(DirectionMove.SumX, _distance);
+                    }
+                    else
+                    {
+                        MoveTo(DirectionMove.RestX, _distance);
+                    }
+                }
+                else
+                {
+                    return false;
                 }
             }
             else
             {
-                int possibleY = nextMoveSum ? posY + 1 : posY - 1;
-                if (possibleY >= 1 && possibleY <= maxY)
+                int possibleY = nextMoveSum ? position.Item2 + 1 : position.Item2 - 1;
+                if (possibleY >= 1 && possibleY <= _maxY)
                 {
-                    posY = possibleY;
+                    if (nextMoveSum)
+                    {
+                        MoveTo(DirectionMove.SumY, _distance);
+                    }
+                    else
+                    {
+                        MoveTo(DirectionMove.RestY, _distance);
+                    }
+                }
+                else
+                {
+                    return false;
                 }
             }
+
+            return true;
         }
 
-        public void TurnLeft()
-        {
-            switch (dir.ToString())
-            {
-                case Directions.North:
-                    dir = Directions.West;
-                    nextMoveX = true;
-                    nextMoveSum = false;
-                    break;
-                case Directions.West:
-                    dir = Directions.South;
-                    nextMoveX = true;
-                    nextMoveSum = false;
-                    break;
-                case Directions.South:
-                    dir = Directions.East;
-                    nextMoveSum = true;
-                    nextMoveX = true;
-                    break;
-                case Directions.East:
-                    dir = Directions.North;
-                    nextMoveSum = true;
-                    nextMoveX = false;
-                    break;
-
-            }
-        }
-        public void TurnRight()
-        {
-            switch (dir.ToString())
-            {
-                case Directions.North:
-                    dir = Directions.East;
-                    nextMoveX = true;
-                    nextMoveSum = true;
-                    break;
-                case Directions.West:
-                    dir = Directions.North;
-                    nextMoveX = false;
-                    nextMoveSum = true;
-                    break;
-                case Directions.South:
-                    dir = Directions.West;
-                    nextMoveSum = false;
-                    nextMoveX = true;
-                    break;
-                case Directions.East:
-                    dir = Directions.South;
-                    nextMoveSum = false;
-                    nextMoveX = false;
-                    break;
-
-            }
-        }
     }
 }
