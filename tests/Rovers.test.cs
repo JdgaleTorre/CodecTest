@@ -6,12 +6,12 @@ namespace Rovers.Test
 {
     public class RoversRobotTest
     {
-        static Rovers.RoversRobot newRover = new Rovers.RoversRobot(new Plateau(5, 5), 1);
+        static Rovers.RoversRobot newRover = new Rovers.RoversRobot(new Plateau.Plateau(5, 5), 1);
         [SetUp]
         public static void InitializeTests()
         {
             // Creating Robot and Plateau
-            Plateau newPlateau = new Plateau(5, 5);
+            Plateau.Plateau newPlateau = new Plateau.Plateau(5, 5);
             newRover = new Rovers.RoversRobot(newPlateau, 1);
         }
         [Test]

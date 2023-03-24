@@ -1,14 +1,15 @@
 using System;
 using Robot;
+using Plateau;
 
 namespace Rovers
 {
     public class RoversRobot : Robot.BareRobot
     {
-        private Plateau _plateau;
+        private Plateau.Plateau _plateau;
         private int _distance { get; set; }
 
-        public RoversRobot(Plateau plateau, int stepLength) : base(stepLength)
+        public RoversRobot(Plateau.Plateau plateau, int stepLength) : base(stepLength)
         {
             _plateau = plateau;
             _distance = 1;
