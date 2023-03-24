@@ -10,28 +10,28 @@ namespace Rovers.Test
         public void Move()
         {
             Rovers.RoversRobot newRover = new Rovers.RoversRobot(5, 5);
-            Assert.AreEqual("1,4,West", newRover.Instruction("FFRFLFLF"));
+            Assert.AreEqual("1,4,West", newRover.Instructions("FFRFLFLF"));
         }
 
         [Test]
         public void ZeroMove()
         {
             Rovers.RoversRobot newRover = new Rovers.RoversRobot(5, 5);
-            Assert.AreEqual("1,1,North", newRover.Instruction(""));
+            Assert.AreEqual("1,1,North", newRover.Instructions(""));
         }
 
         [Test]
         public void JustTurningLeft()
         {
             Rovers.RoversRobot newRover = new Rovers.RoversRobot(5, 5);
-            Assert.AreEqual("1,1,North", newRover.Instruction("LLLL"));
+            Assert.AreEqual("1,1,North", newRover.Instructions("LLLL"));
         }
 
         [Test]
         public void InstructionNotValid()
         {
             Rovers.RoversRobot newRover = new Rovers.RoversRobot(5, 5);
-            Assert.AreEqual("Instruction no valid!", newRover.Instruction("FFFFFFFF"));
+            Assert.AreEqual("Instruction no valid!", newRover.Instructions("FFFFFFFF"));
         }
     }
 }

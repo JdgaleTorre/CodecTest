@@ -11,7 +11,7 @@ do
         string moves = Console.ReadLine().ToString();
 
         Rovers.RoversRobot newRovers = new Rovers.RoversRobot(int.Parse(size.Split(",")[0]), int.Parse(size.Split(",")[1]));
-        Console.WriteLine(newRovers.Instruction(moves));
+        Console.WriteLine(newRovers.Instructions(moves));
 
     }
     Console.Write("Write `N` to create a new Rovers, to Exit write `E`:");

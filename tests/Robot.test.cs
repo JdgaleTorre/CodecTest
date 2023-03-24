@@ -10,8 +10,13 @@ namespace Robot.Test
         public void BasicMoves()
         {
             Robot newRobot = new Robot();
-            newRobot.MakeMove();
-            newRobot.MakeMove();
+            (int, int) newPosition;
+            for (int i = 0; i < 2; i++)
+            {
+                newPosition = newRobot.GetMoveDirection();
+                newRobot.Move(newPosition.Item1, newPosition.Item2);
+            }
+
 
             (int, int, string) position = newRobot.GetPosition();
             Assert.AreEqual(1, position.Item1);
@@ -62,9 +67,11 @@ namespace Robot.Test
         public void MakingTenMoves()
         {
             Robot newRobot = new Robot();
+            (int, int) newPosition;
             for (int i = 0; i < 10; i++)
             {
-                newRobot.MakeMove();
+                newPosition = newRobot.GetMoveDirection();
+                newRobot.Move(newPosition.Item1, newPosition.Item2);
             }
 
             (int, int, string) position = newRobot.GetPosition();
